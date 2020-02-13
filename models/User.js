@@ -13,10 +13,6 @@ var _userSchema = mongo.Schema({
     password: {
         type: String,
     },
-    age: {
-        type: Number,
-        default: 1
-    },
     photo: {
         type: String,
         default: 'null',
