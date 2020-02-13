@@ -6,7 +6,7 @@ var _userSchema = mongo.Schema({
     surnames: {
         type: String,
     },
-    email: {
+    username: {
         type: String,
         unique: true
     },

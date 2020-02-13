@@ -10,14 +10,14 @@ function _newUserCreated(req, res) {
     let {
         names,
         surnames,
-        email,
+        username,
         age,
         password,
     } = req.body;
     let u = new User();
     u.names = names;
     u.surnames = surnames;
-    u.email = email;
+    u.username = username;
     u.age = age;
     u.created_at = moment().unix();
 
