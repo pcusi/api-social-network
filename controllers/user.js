@@ -11,7 +11,6 @@ function _newUserCreated(req, res) {
         names,
         surnames,
         username,
-        age,
         password,
     } = req.body;
     let u = new User();
