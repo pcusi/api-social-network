@@ -13,7 +13,8 @@ app.use(_cors());
 const _userRoute = require('./routes/user.routes');
 const _friendRoute = require('./routes/friendship.routes');
 const _publicationRoute = require('./routes/publication.routes');
-app.use('/api/v1', [_userRoute, _friendRoute, _publicationRoute]);
+const _commentRoute = require('./routes/comment.routes');
+app.use('/api/v1', [_userRoute, _friendRoute, _publicationRoute, _commentRoute]);
 
 const mongo = require('mongoose');
 mongo.Promise = global.Promise;
@@ -21,7 +22,8 @@ mongo.Promise = global.Promise;
 mongo.connect('mongodb://localhost:27017/db-social_network', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false,
 }).then(connected => {
     if (connected) {
         console.log('MONGODB CONNECTED');

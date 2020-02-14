@@ -18,7 +18,6 @@ function _newUserCreated(req, res) {
     u.names = names;
     u.surnames = surnames;
     u.username = username;
-    u.age = age;
     u.created_at = moment().unix();
 
 
@@ -49,12 +48,12 @@ function _newUserCreated(req, res) {
 
 async function _userLogIn(req, res) {
     let {
-        email,
+        username,
         password
     } = req.body;
     /* creating a variable with contains the findOne from the model */
     let user = await User.findOne({
-        'email': email
+        'username': username
     });
     /* if user exists create a TOKEN */
     if (user) {

@@ -4,11 +4,16 @@ const Like = require('../models/Likes');
 
 async function _newUserPublication(req, res) {
     if (!req.user) {
-        return res.status(403).send({
-            message: 'No tienes autorización para publicar en nuestra plataforma!'
-        });
+        try {
+            return res.status(401).send({
+                message: 'No tienes autorización'
+            });
+        } catch (err) {
+            return res.status(404).send({
+                message: 'Error'
+            })
+        }
     }
-
     let {
         description
     } = req.body;
