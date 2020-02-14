@@ -1,6 +1,5 @@
 const Publication = require('../models/Publication');
 const moment = require('moment');
-const Like = require('../models/Likes');
 
 async function _newUserPublication(req, res) {
     if (!req.user) {
@@ -31,53 +30,7 @@ async function _newUserPublication(req, res) {
     }));
 }
 
-async function _likePublication(req, res) {
-    let id = req.params.id;
-    /* we need find an isset publication  */
-    let pub = await Publication.findById(id);
 
-    if (pub) {
-
-        Like.find({
-            '$or': [{
-                'user': req.user,
-                'publication': id
-            }]
-        }).populate('user').then(async result => {
-
-            if (result && result.length >= 1) {
-                return res.status(200).send({
-                    message: 'Ya diste like a esta publicación'
-                });
-            } else if (result.length <= 1) {
-
-                let like = new Like();
-                like.publication = id;
-                like.like += 1;
-                like.user = req.user;
-                await like.save().then(likes => {
-                    return res.status(200).send({
-                        likes
-                    })
-                });
-            } else {
-                Like.update({
-                    '$push': {
-                        'user': [req.user]
-                    }
-                }).then(likes => {
-                    return res.status(200).send({
-                        likes
-                    });
-                }).catch(err => res.status(400).send({
-                    message: `${err}`
-                }));
-            }
-        })
-
-    }
-
-}
 
 module.exports = {
     _newUserPublication,
