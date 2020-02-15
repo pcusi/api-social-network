@@ -34,5 +34,4 @@ async function _newUserPublication(req, res) {
 
 module.exports = {
     _newUserPublication,
-    _likePublication
 }

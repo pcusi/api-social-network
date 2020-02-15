@@ -122,8 +122,20 @@ async function _userPhotoCreated(req, res) {
     }
 }
 
+function _getUserProfile(req, res) {
+    let id = req.params.id;
+    User.findById(id).then(user => {
+        if (user) {
+            return res.status(200).send({
+                message: user
+            });
+        }
+    });
+}
+
 module.exports = {
     _newUserCreated,
     _userLogIn,
-    _userPhotoCreated
+    _userPhotoCreated,
+    _getUserProfile
 }
